@@ -1,25 +1,13 @@
 import account
-import euro
-answer = input('"Вы хотите открыть счёт в иностранной валюте? (y/n)')
+import val
 
-if not answer or answer[0].lower() != 'n':
-        money = int(input("Введите сумму, которую вы хотите обменять: "))
-        currency = int(input("Укажите код валюты (USD - 400, EUR - 401, BGN - 402, HUF - 403): "))
-        result = euro.russian_analog(currency)
-        count = result
-        result = euro.currency_calc(money,currency)
-        money = result
-        rate = int(input("Введите процентную ставку: "))
-        period = int(input("Введите период ведения счета в месяцах: "))
-        result = account.calculate_income(rate, money, period)
-        count = round(result * count)
-        print("Параметры счета:\n", "Сумма: ", money, "\n", "Ставка: ", rate, "\n", "Период: ", period, "\n",
-              "Сумма на счете в конце периода: ", result, "\n", "В переводе в рубли: ", count)
+def main():
+    rate = int(input('Введите ставку:'))
+    money = int(input('Введите сумму:'))
+    period = int(input('Введите период:'))
+    result = account.calculate_income(rate,period,money)
 
-else:
-        rate = int(input("Введите процентную ставку: "))
-        money = int(input("Введите сумму: "))
-        period = int(input("Введите период ведения счета в месяцах: "))
-        result = account.calculate_income(rate, money, period)
-        print("Параметры счета:\n", "Сумма: ", money, "\n", "Ставка: ", rate, "\n", "Период: ", period, "\n",
-          "Сумма на счете в конце периода: ", result)
+    result2 = val.perevod(result)
+    print ("Параметры счета:\n", "Сумма",money, "\n", "Ставки", rate, "\n", "Период", period, "\n", "Общая сумма", result, "\n")
+if __name__=="__main__":
+    main()
